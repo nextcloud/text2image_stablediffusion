@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+    <!--
+    SPDX-FileCopyrightText: Marcel Klehr <mklehr@gmx.net>
+    SPDX-License-Identifier: CC0-1.0
+    -->
+    <id>text2image_stablediffusion</id>
+    <name>Local Image Generation with Stable Diffusion</name>
+    <summary>Image generation using Stable Diffusion by Stability AI running locally</summary>
+    <description><![CDATA[
+Image generation provider using Stable Diffusion by Stability AI
+
+The models run completely on your machine. No private data leaves your servers.
+
+After installing this app you will need to run
+
+    occ text2image_stablediffusion:download-models
+
+Requirements:
+
+* x86 CPU
+* GNU lib C (musl is not supported)
+
+## Ethical AI Rating
+### Rating: 🟢
+
+Positive:
+* the software for training and inference of this model is open source
+* the trained model is freely available, and thus can be ran on-premises
+* the training data is freely available, making it possible to check or correct for bias or optimise the performance and CO2 usage.
+
+Learn more about the Nextcloud Ethical AI Rating [in our blog](https://nextcloud.com/blog/nextcloud-ethical-ai-rating/).
+
+]]></description>
+    <version>1.0.0</version>
+    <licence>agpl</licence>
+    <author mail="mklehr@gmx.net" homepage="https://marcelklehr.de">Marcel Klehr</author>
+    <namespace>Text2Image_StableDiffusion</namespace>
+    <category>tools</category>
+    <bugs>https://github.com/nextcloud/text2image_stablediffusion/issues</bugs>
+    <screenshot>https://raw.githubusercontent.com/nextcloud/text2image_stablediffusion/main/screenshots/Logo.png</screenshot>
+
+    <dependencies>
+        <nextcloud min-version="28" max-version="28" />
+    </dependencies>
+
+    <repair-steps>
+        <post-migration>
+            <step>OCA\Text2Image_StableDiffusion\Migration\InstallDeps</step>
+        </post-migration>
+        <install>
+            <step>OCA\Text2Image_StableDiffusion\Migration\InstallDeps</step>
+        </install>
+    </repair-steps>
+
+    <commands>
+        <command>OCA\Text2Image_StableDiffusion\Command\DownloadModels</command>
+        <command>OCA\Text2Image_StableDiffusion\Command\Generate</command>
+    </commands>
+
+</info>
