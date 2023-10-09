@@ -11,38 +11,39 @@ const __dirname = path.dirname(__filename);
 
 global.__dirname = __dirname
 
-const SEED = 1
-const NUM_INFERENCE_STEPS = 25
+const SEED = 42
+const NUM_INFERENCE_STEPS = 40
 const THREADS = parseInt(process.env.STABLEDIFFUSION_THREADS || 6)
+const GUIDANCE_SCALE = 5.0
 
-async function main(inputText) {
+async function main(inputText, outputFile) {
 	if (inputText === '-') {
 		inputText = await getStdin()
 	}
 
 	const textEncoder = await ort.InferenceSession.create(__dirname+'/../models/stable-diffusion-xl/text_encoder/model.onnx', {
-		executionMode: 'sequential',
+		executionMode: 'parallel',
 		executionProviders: ['cuda', 'cpu'],
 		intraOpNumThreads: THREADS,
 		interOpNumThreads: THREADS
 	})
 
 	const uNet = await ort.InferenceSession.create(__dirname+'/../models/stable-diffusion-xl/unet/model.onnx', {
-		executionMode: 'sequential',
+		executionMode: 'parallel',
 		executionProviders: ['cuda', 'cpu'],
 		intraOpNumThreads: THREADS,
 		interOpNumThreads: THREADS
 	})
 
 	const vaeDecoder = await ort.InferenceSession.create(__dirname+'/../models/stable-diffusion-xl/vae_decoder/model.onnx', {
-		executionMode: 'sequential',
+		executionMode: 'parallel',
 		executionProviders: ['cuda', 'cpu'],
 		intraOpNumThreads: THREADS,
 		interOpNumThreads: THREADS
 	})
 
 	const textEncoder2 = await ort.InferenceSession.create(__dirname+'/../models/stable-diffusion-xl/text_encoder_2/model.onnx', {
-		executionMode: 'sequential',
+		executionMode: 'parallel',
 		executionProviders: ['cuda', 'cpu'],
 		intraOpNumThreads: THREADS,
 		interOpNumThreads: THREADS
@@ -70,8 +71,9 @@ async function main(inputText) {
 		input_ids: inputTensor2
 	})
 
+  const textEmbedsTf = tf.tensor(textEmbeds.data, textEmbeds.dims)
 
-	const allPromptEmbeds = tf.concat([
+	const promptEmbeds = tf.concat([
 		tf.tensor(lastHiddenState.data, lastHiddenState.dims),
 		tf.tensor(lastHiddenState2.data, lastHiddenState2.dims)
 	], -1)
@@ -88,6 +90,16 @@ async function main(inputText) {
 	const vae_scale_factor = 2 ** (vaeEncoderConfig.block_out_channels.length - 1)
 	const HEIGHT = unetConfig.sample_size * vae_scale_factor
 	const WIDTH = unetConfig.sample_size * vae_scale_factor
+  const do_classifier_free_guidance = GUIDANCE_SCALE > 1.0
+
+  
+  let negativePromptEmbeds
+  let negativePooledPromptEmbeds
+  if (do_classifier_free_guidance) {
+    // we don't allow negative prompts for now, otherwise we'd encode them here
+    negativePromptEmbeds = promptEmbeds.mul(0.0)
+    negativePooledPromptEmbeds = textEmbedsTf.mul(0.0)
+  }
 
 	// prepare latents
 
@@ -127,14 +139,26 @@ async function main(inputText) {
 
 	// denoising loop
 
-	const time_ids = new ort.Tensor('float32', Float32Array.from([HEIGHT, WIDTH, 0, 0, HEIGHT, WIDTH]), [1, 6])
+  const time_ids_tf = tf.tensor([HEIGHT, WIDTH, 0, 0, HEIGHT, WIDTH], [1, 6], 'float32')
+  const time_ids_double = tf.concat([time_ids_tf, time_ids_tf], 0)
+	const time_ids =  do_classifier_free_guidance ? 
+      new ort.Tensor('float32', await time_ids_double.data(), time_ids_double.shape)
+      : new ort.Tensor('float32', await time_ids_tf.data(), time_ids_tf.shape)
+
+  const allPromptEmbeds = do_classifier_free_guidance ? tf.concat([negativePromptEmbeds, promptEmbeds], 0) : promptEmbeds
+  const allTextEmbeds = do_classifier_free_guidance ? tf.concat([negativePooledPromptEmbeds, textEmbedsTf], 0) : textEmbedsTf
 	const allPromptEmbedsTensor = new ort.Tensor('float32', await allPromptEmbeds.data(), allPromptEmbeds.shape)
-	let i = 0
+	const allTextEmbedsTensor = new ort.Tensor('float32', await allTextEmbeds.data(), allTextEmbeds.shape)
+
+  console.log('Starting denoising loop')
+
+  let i = 0
 	for (let t of timesteps) {
 		const sigmasArray = await interp_sigmas.array()
 		const sigma = sigmasArray[i]
 
-		const sample = tf.tidy(() => latents.div(tf.scalar(sigma).pow(2).add(1).pow(0.5)))
+    const model_input = do_classifier_free_guidance ? tf.tidy(() => tf.concat([latents, latents], 0)) : latents
+		const sample = tf.tidy(() => model_input.div(tf.scalar(sigma).pow(2).add(1).pow(0.5)))
 
 		let timestepTensor = new ort.Tensor('int64', BigInt64Array.from([BigInt(t)]), [1])
 		let sampleTensor = new ort.Tensor('float32', await sample.data(), sample.shape)
@@ -143,7 +167,7 @@ async function main(inputText) {
 			sample: sampleTensor,
 			timestep: timestepTensor,
 			encoder_hidden_states: allPromptEmbedsTensor,
-			text_embeds: textEmbeds,
+			text_embeds: allTextEmbedsTensor,
 			time_ids,
 		})
 
@@ -151,17 +175,23 @@ async function main(inputText) {
 			i, latents: {shape: latents.shape, data: await latents.data()}, noisePred: noisePredTensor
 		})
 
+    let noisePred = tf.tensor(noisePredTensor.data, noisePredTensor.dims, 'float32')
+    if (do_classifier_free_guidance) {
+        const [noisePredUncond, noisePredText] = tf.split(noisePred, 2)
+        noisePred = noisePredUncond.add(noisePredText.sub(noisePredUncond).mul(GUIDANCE_SCALE))
+    }
+
 		latents = tf.tidy(() => {
-			const sigmaTf = tf.scalar(sigma)
-			const noisePred = tf.tensor(noisePredTensor.data, noisePredTensor.dims, 'float32')
-			const pred_original_sample = latents.sub(sigmaTf.mul(noisePred))
-			const derivative = latents.sub(pred_original_sample).div(sigmaTf)
+			const pred_original_sample = latents.sub(noisePred.mul(sigma))
+			const derivative = latents.sub(pred_original_sample).div(sigma)
 			const dt = sigmasArray[i + 1] - sigma
 			derivative.data().then(derivative => console.log({dt, derivative}))
 			return latents.add(derivative.mul(tf.scalar(dt)))
 		})
 
 		sample.dispose()
+		noisePred.dispose()
+    model_input.dispose()
 
 		i++
 	}
@@ -177,11 +207,12 @@ async function main(inputText) {
 
 	const decodedSample = tf.tensor(decodedSampleTensor.data, decodedSampleTensor.dims, 'float32')
 
-	await exportSample(decodedSample, 'output.png')
+	await exportSample(decodedSample, outputFile)
 }
 
 await main(
-	process.argv[2]
+	process.argv[2],
+	process.argv[3]
 )
 
 function tokenize(text, vocab) {
