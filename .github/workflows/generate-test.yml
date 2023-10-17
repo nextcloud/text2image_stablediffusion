@@ -23,7 +23,7 @@ jobs:
       matrix:
         php-versions: [ '8.1' ]
         databases: [ 'sqlite' ]
-        server-versions: ['stable27', 'master' ]
+        server-versions: [ 'master' ]
 
     name: Test generate command on ${{ matrix.server-versions }} php@${{ matrix.php-versions }}
 
