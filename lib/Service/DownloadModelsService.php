@@ -50,7 +50,7 @@ class DownloadModelsService {
 		$tarManager = new TAR($archivePath);
 		$tarFiles = $tarManager->getFiles();
 		$targetPath = __DIR__ . '/../../models/';
-		$tarManager->extractList($tarFiles, $targetPath, $modelPath . '/');
+		$tarManager->extractList($tarFiles, $targetPath);
 		unlink($archivePath);
 		return true;
 	}
