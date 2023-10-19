@@ -1,0 +1,7 @@
+{ "translations": {
+    "Status" : "Status",
+    "Resources" : "Risorsas",
+    "Failed to load settings" : "No at fatuu a carrigare is impostatziones",
+    "Failed to save settings" : "No at fatu a sarvare is informatziones"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}

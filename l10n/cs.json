@@ -1,7 +1,25 @@
 { "translations": {
     "Local Image Generation with Stable Diffusion" : "Lokální vytváření obrázků pomocí Stable Diffusion",
+    "Local Text-To-Image Stable Diffusion" : "Lokální vytváření obrázků z textového popisu Stable Diffusion",
     "Image generation using Stable Diffusion by Stability AI running locally" : "Vytváření obrázků pomocí Stable Diffusion od Stability AI, provozované na tomto serveru",
+    "Status" : "Stav",
+    "Machine learning models have been downloaded successfully." : "Modely strojového učení byly úspěšně staženy.",
     "The machine learning models still need to be downloaded (see below)." : "Pořád ještě je třeba stáhnout si modely strojového učení (viz níže).",
-    "Checking Node.js" : "Kontrola Node.js"
+    "Could not execute the Node.js executable. You may need to set the path to a working executable manually. (See below.)" : "Nedaří se spustit soubor, obsahující Node.js. Může být třeba ručně nastavit popis umístění funkčního spustitelného souboru (viz níže).",
+    "Background Jobs are not executed via cron. This app requires background jobs to be executed via cron." : "Úlohy na pozadí nejsou vykonávány prostřednictvím plánovače cron. Tato aplikace ovšem vyžaduje, aby tomu tak bylo.",
+    "The app was installed successfully and will generate images in background processes on request." : "Aplikace byla úspěšně nainstalována a na vyžádání bude v procesech na pozadí provádět vytváření obrázků.",
+    "Scheduled transcription Jobs: {scheduled}" : "Naplánované úlohy přepisu na text: {scheduled}",
+    "Image generation job currently running" : "Právě probíhá úloha vytváření obrázku",
+    "No image generation job currently running" : "V tuto chvíli neprobíhá žádná úloha vytváření obrázku",
+    "Resources" : "Prostředky",
+    "The number of threads to use" : "Počet vláken, které použít",
+    "Node.js" : "Node.js",
+    "Checking Node.js" : "Kontrola Node.js",
+    "Could not execute the Node.js binary. You may need to set the path to a working binary manually." : "Nedaří se spustit Node.js. Může být třeba ručně nastavit popis umístění fungujícího spustitelného souboru s ním.",
+    "Node.js {version} binary was installed successfully." : "Spustitelný soubor s Node.js {version} byl úspěšně nainstalován.",
+    "If the shipped Node.js binary doesn't work on your system for some reason you can set the path to a custom node.js binary. Currently supported is Node v18.12 and newer v18 releases." : "Pokud dodávaný spustitelný soubor Node.js z nějakého důvodu na vámi využívaném systému nefunguje, je možné nasměrovat na uživatelsky určený spustitelný soubor node.js. V tuto chvíli je podporováno Node v18.12 a novější v řadě 18.",
+    "For Nextcloud Snap users, you need to adjust this path to point to the snap's \"current\" directory as the pre-configured path will change with each update. For example, set it to \"/var/snap/nextcloud/current/nextcloud/extra-apps/recognize/bin/node\" instead of \"/var/snap/nextcloud/9337974/nextcloud/extra-apps/recognize/bin/node\"" : "Uživatelé Nextcloud Snap budou potřebovat upravit tento popis umístění aby ukazovatl na „current“ adresář snapu, protože přednastavený popis se změní při každé aktualizaci. Například nastavte na „/var/snap/nextcloud/current/nextcloud/extra-apps/recognize/bin/node“ namísto „/var/snap/nextcloud/9337974/nextcloud/extra-apps/recognize/bin/node“",
+    "Failed to load settings" : "Nepodařilo se načíst nastavení",
+    "Failed to save settings" : "Nastavení se nepodařilo uložit"
 },"pluralForm" :"nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;"
 }

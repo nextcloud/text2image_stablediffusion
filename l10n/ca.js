@@ -1,0 +1,12 @@
+OC.L10N.register(
+    "text2image_stablediffusion",
+    {
+    "Resources" : "Recursos",
+    "Node.js" : "Node.js",
+    "Checking Node.js" : "Comprovant Node.js",
+    "Could not execute the Node.js binary. You may need to set the path to a working binary manually." : "No s'ha pogut executar el binari Node.js. És possible que hàgiu d'establir el camí a un binari de treball manualment.",
+    "Node.js {version} binary was installed successfully." : "El binari Node.js {version} s'ha instal·lat correctament.",
+    "Failed to load settings" : "Ha fallat carregar els paràmetres",
+    "Failed to save settings" : "Ha fallat desar els paràmetres"
+},
+"nplurals=2; plural=(n != 1);");
