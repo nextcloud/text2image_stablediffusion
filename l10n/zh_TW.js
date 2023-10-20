@@ -21,6 +21,7 @@ OC.L10N.register(
     "Could not execute the Node.js binary. You may need to set the path to a working binary manually." : "無法執行 Node.js 可執行檔。您可能需要手動設定可運作的可執行檔路徑。",
     "Node.js {version} binary was installed successfully." : "Node.js {version} 可執行檔已成功安裝。",
     "If the shipped Node.js binary doesn't work on your system for some reason you can set the path to a custom node.js binary. Currently supported is Node v18.12 and newer v18 releases." : "若內建的 Node.js 可執行檔因為某些因素無法在您的系統上執行，您可以設定自訂的 Node.js 可執行檔路徑。目前支援的版本為 Node v18.12 與更新的 v18 版本。",
+    "For Nextcloud Snap users, you need to adjust this path to point to the snap's \"current\" directory as the pre-configured path will change with each update. For example, set it to \"/var/snap/nextcloud/current/nextcloud/extra-apps/recognize/bin/node\" instead of \"/var/snap/nextcloud/9337974/nextcloud/extra-apps/recognize/bin/node\"" : "對於 Nextcloud Snap 使用者，您必須調整此路徑以指向 Snap 的「current」目錄，因為預先設定的路徑會隨著每次更新而變更。例如，將其設定為「/var/snap/nextcloud/current/nextcloud/extra-apps/recognize/bin/node」而非「/var/snap/nextcloud/9337974/nextcloud/extra-apps/recognize/bin/node」",
     "Failed to load settings" : "設定載入失敗",
     "Failed to save settings" : "設定儲存失敗"
 },
