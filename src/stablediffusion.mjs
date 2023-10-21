@@ -11,15 +11,17 @@ const __dirname = path.dirname(__filename);
 
 global.__dirname = __dirname
 
-const SEED = 42
+const SEED = Math.round(Math.random()*100000)
 const NUM_INFERENCE_STEPS = 40
-const THREADS = parseInt(process.env.STABLEDIFFUSION_THREADS || 6)
+const THREADS = parseInt(process.env.STABLEDIFFUSION_THREADS || 4)
 const GUIDANCE_SCALE = 5.0
 
-async function main(inputText, outputFile) {
+async function main(inputText, batchSizeStr, outputDir) {
 	if (inputText === '-') {
 		inputText = await getStdin()
 	}
+
+	const batchSize = parseInt(batchSizeStr)
 
 	const textEncoder = await ort.InferenceSession.create(__dirname+'/../models/stable-diffusion-xl/text_encoder/model.onnx', {
 		executionMode: 'parallel',
@@ -71,12 +73,12 @@ async function main(inputText, outputFile) {
 		input_ids: inputTensor2
 	})
 
-  const textEmbedsTf = tf.tensor(textEmbeds.data, textEmbeds.dims)
+  const textEmbedsTf = tf.tidy(() => tf.tensor(textEmbeds.data, textEmbeds.dims).tile([batchSize, 1]))
 
-	const promptEmbeds = tf.concat([
+	const promptEmbeds = tf.tidy(() => tf.concat([
 		tf.tensor(lastHiddenState.data, lastHiddenState.dims),
 		tf.tensor(lastHiddenState2.data, lastHiddenState2.dims)
-	], -1)
+	], -1).tile([batchSize, 1, 1]))
 
 	console.log({
 		lastHiddenState,
@@ -92,7 +94,7 @@ async function main(inputText, outputFile) {
 	const WIDTH = unetConfig.sample_size * vae_scale_factor
   const do_classifier_free_guidance = GUIDANCE_SCALE > 1.0
 
-  
+
   let negativePromptEmbeds
   let negativePooledPromptEmbeds
   if (do_classifier_free_guidance) {
@@ -103,7 +105,7 @@ async function main(inputText, outputFile) {
 
 	// prepare latents
 
-	const latentShape = [1, vaeEncoderConfig.latent_channels, Math.floor(HEIGHT / vae_scale_factor), Math.floor(WIDTH / vae_scale_factor)]
+	const latentShape = [batchSize, vaeEncoderConfig.latent_channels, Math.floor(HEIGHT / vae_scale_factor), Math.floor(WIDTH / vae_scale_factor)]
 	let latents = tf.randomNormal(latentShape, 0,1, 'float32', SEED)
 
 	// EulerDiscreteScheduler
@@ -140,8 +142,8 @@ async function main(inputText, outputFile) {
 	// denoising loop
 
   const time_ids_tf = tf.tensor([HEIGHT, WIDTH, 0, 0, HEIGHT, WIDTH], [1, 6], 'float32')
-  const time_ids_double = tf.concat([time_ids_tf, time_ids_tf], 0)
-	const time_ids =  do_classifier_free_guidance ? 
+  const time_ids_double = tf.tidy(() => tf.concat([time_ids_tf, time_ids_tf], 0).tile([batchSize, 1]))
+	const time_ids =  do_classifier_free_guidance ?
       new ort.Tensor('float32', await time_ids_double.data(), time_ids_double.shape)
       : new ort.Tensor('float32', await time_ids_tf.data(), time_ids_tf.shape)
 
@@ -207,12 +209,13 @@ async function main(inputText, outputFile) {
 
 	const decodedSample = tf.tensor(decodedSampleTensor.data, decodedSampleTensor.dims, 'float32')
 
-	await exportSample(decodedSample, outputFile)
+	await exportSample(decodedSample, outputDir)
 }
 
 await main(
 	process.argv[2],
-	process.argv[3]
+	process.argv[3],
+	process.argv[4]
 )
 
 function tokenize(text, vocab) {
@@ -264,16 +267,19 @@ async function interp(xTensor, xpTensor, ypTensor) {
 	return tf.tensor(y, [y.length])
 }
 
-async function exportSample(decodedSample, filename) {
-	const image = tf.tidy(() => decodedSample
-		.div(2)
-		.add(0.5)
-		.mul(255).round().clipByValue(0, 255).cast('int32')
-		.transpose([0, 2, 3, 1])
-		.reshape([1024, 1024, 3])
+async function exportSample(decodedSamples, path) {
+	const images = tf.tidy(() => decodedSamples
+			.div(2)
+			.add(0.5)
+			.mul(255).round().clipByValue(0, 255).cast('int32')
+			.transpose([0, 2, 3, 1])
+			.unstack()
+			.map(decodedSample => decodedSample.reshape([1024, 1024, 3]))
 	)
 
-	const p = new PNG({ width: 1024, height: 1024, inputColorType: 2 })
-	p.data = Buffer.from((await image.data()))
-	await new Promise(resolve => p.pack().pipe(fs.createWriteStream(filename)).on('finish', resolve))
+	for (let i = 0; i < images.length; i++) {
+		const p = new PNG({ width: 1024, height: 1024, inputColorType: 2 })
+		p.data = Buffer.from((await images[0].data()))
+		await new Promise(resolve => p.pack().pipe(fs.createWriteStream(path + '/' + i)).on('finish', resolve))
+	}
 }

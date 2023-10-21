@@ -25,23 +25,25 @@ class ImageGenerationService {
 
 	/**
 	 * @param string $input
+	 * @param int $numberOfImages
 	 * @param int $timeout
 	 * @throws \RuntimeException
-	 * @return string the file path of the generated image
+	 * @return string the file path of the folder containing the generated images
      */
-	public function runStableDiffusion(string $input, int $timeout = 120 * 60) : string {
+	public function runStableDiffusion(string $input, int $numberOfImages, int $timeout = 240 * 60) : string {
 		$modelPath = __DIR__ . '/../../models/stable-diffusion-xl';
 		if (!file_exists($modelPath)) {
 			throw new \RuntimeException('Model not downloaded');
 		}
 
-        $tempfile = $this->tempManager->getTemporaryFile();
+        $tempFolder = $this->tempManager->getTemporaryFolder();
 
 		$command = [
 			$this->nodeBinary,
             dirname(__DIR__, 2) . '/src/stablediffusion.mjs',
 			$input,
-            $tempfile,
+			$numberOfImages,
+            $tempFolder,
 		];
 
 		$this->logger->debug('Running '.var_export($command, true));
@@ -58,10 +60,10 @@ class ImageGenerationService {
 		try {
 			$proc->run();
 			if ($proc->getExitCode() !== 0) {
-				$this->logger->warning($proc->getErrorOutput());
+				$this->logger->warning('Stable diffusion process failed with exit code "'.$proc->getExitCode().'": '.$proc->getErrorOutput());
 				throw new \RuntimeException('Stable diffusion process failed');
 			}
-            return $tempfile;
+            return $tempFolder;
 		} catch (ProcessTimedOutException $e) {
 			$this->logger->warning($proc->getErrorOutput());
 			throw new \RuntimeException('Stable diffusion process timeout');

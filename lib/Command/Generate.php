@@ -27,7 +27,8 @@ class Generate extends Command {
 	protected function configure() {
 		$this->setName('text2image_stablediffusion:generate')
 			->setDescription('Generates an image for a prompt input')
-			->addArgument('input');
+			->addArgument('input')
+			->addArgument('numberOfImages');
 	}
 
 	/**
@@ -40,7 +41,8 @@ class Generate extends Command {
 	 */
 	protected function execute(InputInterface $input, OutputInterface $output): int {
 		try {
-			$output->writeln($this->service->runStableDiffusion($input->getArgument('input')));
+            $path = $this->service->runStableDiffusion($input->getArgument('input'), (int) $input->getArgument('numberOfImages'));
+            rename($path, getcwd() . '/generated-images-'.time());
 			return 0;
 		} catch(\RuntimeException $e) {
 			$output->writeln($e->getMessage());

@@ -25,17 +25,23 @@ class ImageGeneration implements IProvider {
 
     /**
      * @param string $prompt
-     * @param resource $resource
+     * @param resource[] $resources
      * @return void
      */
-    public function generate(string $prompt, $resource): void {
-        $filepath = $this->service->runStableDiffusion($prompt);
-        $output = fopen($filepath, 'r');
-        if (stream_copy_to_stream($output, $resource) === false) {
-            $this->logger->warning('Could not copy stable diffusion result to stream');
+    public function generate(string $prompt, array $resources): void {
+        $folderPath = $this->service->runStableDiffusion($prompt);
+        foreach($resources as $i => $resource) {
+            $output = fopen($folderPath . '/' . $i, 'r');
+            if (stream_copy_to_stream($output, $resource) === false) {
+                $this->logger->warning('Could not copy stable diffusion result to stream');
+                fclose($output);
+                throw new \RuntimeException('Could not copy stable diffusion result to stream');
+            }
             fclose($output);
-            throw new \RuntimeException('Could not copy stable diffusion result to stream');
         }
-        fclose($output);
+    }
+
+    public function getExpectedRuntime(): int {
+        return 60 * 90; // 1.5h
     }
 }
