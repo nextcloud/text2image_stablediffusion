@@ -52,6 +52,7 @@ Learn more about the Nextcloud Ethical AI Rating [in our blog](https://nextcloud
     <commands>
         <command>OCA\Text2Image_StableDiffusion\Command\DownloadModels</command>
         <command>OCA\Text2Image_StableDiffusion\Command\Generate</command>
+        <command>OCA\Text2Image_StableDiffusion\Command\GenerateWithApi</command>
     </commands>
 
 </info>
