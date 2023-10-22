@@ -29,7 +29,7 @@ class ImageGeneration implements IProvider {
      * @return void
      */
     public function generate(string $prompt, array $resources): void {
-        $folderPath = $this->service->runStableDiffusion($prompt);
+        $folderPath = $this->service->runStableDiffusion($prompt, count($resources));
         foreach($resources as $i => $resource) {
             $output = fopen($folderPath . '/' . $i, 'r');
             if (stream_copy_to_stream($output, $resource) === false) {
