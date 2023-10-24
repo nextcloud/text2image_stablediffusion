@@ -10,9 +10,9 @@
   "license": "agpl",
   "private": true,
   "scripts": {
-    "build": "echo 'Nothing to be done'",
-    "dev": "echo 'Nothing to be done'",
-    "watch": "echo 'Nothing to be done'",
+    "build": "NODE_ENV=production webpack --progress --config webpack.js",
+    "dev": "NODE_ENV=development webpack --progress --config webpack.js",
+    "watch": "NODE_ENV=development webpack --progress --watch --config webpack.js",
     "serve": "echo 'Nothing to be done'",
     "lint": "eslint --ext .js,.vue src",
     "lint:fix": "eslint --ext .js,.vue src --fix",
