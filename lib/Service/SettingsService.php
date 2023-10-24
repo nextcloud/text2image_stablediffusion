@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace OCA\Text2Image_StableDiffusion\Service;
 
-use OCA\SttWhisper\AppInfo\Application;
+use OCA\Text2Image_StableDiffusion\AppInfo\Application;
 use OCP\IConfig;
 
 class SettingsService {

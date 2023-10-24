@@ -108,7 +108,7 @@ export default {
 		try {
 			const settings = loadState('text2image_stablediffusion', 'settings')
 			for (const setting of SETTINGS) {
-				this.settings[setting] = JSON.parse(settings[setting])
+				this.settings[setting] = settings[setting]
 			}
 		} catch (e) {
 			this.error = this.t('text2image_stablediffusion', 'Failed to load settings')

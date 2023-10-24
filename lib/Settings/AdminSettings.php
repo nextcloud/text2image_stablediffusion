@@ -6,7 +6,6 @@ declare(strict_types=1);
 namespace OCA\Text2Image_StableDiffusion\Settings;
 
 use OCA\Text2Image_StableDiffusion\AppInfo\Application;
-use OCA\Text2Image_StableDiffusion\Service\DownloadModelsService;
 use OCA\Text2Image_StableDiffusion\Service\SettingsService;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Services\IInitialState;

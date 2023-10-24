@@ -5,7 +5,7 @@ declare(strict_types=1);
 // SPDX-License-Identifier: AGPL-3.0-or-later
 namespace OCA\Text2Image_StableDiffusion\Settings;
 
-use OCA\SttWhisper\AppInfo\Application;
+use OCA\Text2Image_StableDiffusion\AppInfo\Application;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\Settings\IIconSection;
