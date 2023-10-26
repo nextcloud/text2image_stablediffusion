@@ -66,7 +66,7 @@ import { generateUrl } from '@nextcloud/router'
 import { loadState } from '@nextcloud/initial-state'
 
 const SETTINGS = [
-	'ffmpeg_binary',
+	'node_binary',
 	'threads',
 ]
 
