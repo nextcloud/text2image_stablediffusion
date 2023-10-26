@@ -3,7 +3,7 @@ Upstream-Name: Text2Image_StableDiffusion
 Upstream-Contact: Marcel Klehr <mklehr@gmx.net>
 Source: https://github.com/nextcloud/text2image_stablediffusion
 
-Files: package-lock.json package.json composer.json composer.lock CHANGELOG.md src/** test/**
+Files: package-lock.json package.json composer.json composer.lock CHANGELOG.md vendor-bin/** src/** test/** .l10nignore .tx/config
 Copyright: Marcel Klehr <mklehr@gmx.net>
 License: AGPL-3.0-or-later
 
