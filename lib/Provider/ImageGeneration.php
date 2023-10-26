@@ -44,4 +44,8 @@ class ImageGeneration implements IProvider {
     public function getExpectedRuntime(): int {
         return 60 * 90; // 1.5h
     }
+
+    public function getId(): string {
+        return self::class;
+    }
 }
