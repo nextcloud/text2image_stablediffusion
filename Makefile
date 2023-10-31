@@ -142,11 +142,14 @@ appstore:
 	--include=/l10n \
 	--include=/img \
 	--include=/appinfo \
+	--include=/models \
 	--include=/vendor \
 	--include=/templates \
 	--include=/LICENSES \
 	--include=/js \
+	--include=/bin \
 	--exclude=/models/** \
+	--exclude=/bin/** \
 	--exclude=**/*.map \
 	--exclude=/* \
 	$(CURDIR)/ $(sign_dir)/$(app_name)
