@@ -10,7 +10,7 @@ OC.L10N.register(
     "Checking Node.js" : "Vérification de Node.js",
     "Could not execute the Node.js binary. You may need to set the path to a working binary manually." : "Impossible de lancer l'exécutable Node.js. Il peut être nécessaire de configurer manuellement le chemin vers un exécutable fonctionnel.",
     "Node.js {version} binary was installed successfully." : "Le binaire Node.js {version} a été installé avec succès.",
-    "Failed to load settings" : "Echec du chargement des paramètres",
+    "Failed to load settings" : "Échec du chargement des paramètres",
     "Failed to save settings" : "Échec de l'enregistrement des paramètres"
 },
 "nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
