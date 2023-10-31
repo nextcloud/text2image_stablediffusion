@@ -28,12 +28,7 @@ or
 After installing this app you will need to run:
 
 ```
-$ php occ text2image_stablediffusion:download-model
-```
-
-### Downloading only specific languages
-```
-$ php occ text2image_stablediffusion:download-model
+$ php occ text2image_stablediffusion:download-models
 ```
 
 ## Building the app
