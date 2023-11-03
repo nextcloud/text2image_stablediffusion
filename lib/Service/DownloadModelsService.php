@@ -48,9 +48,8 @@ class DownloadModelsService {
 		$timeout = $this->isCLI ? 0 : 480;
 		$this->clientService->newClient()->get($archiveUrl, ['sink' => $archivePath, 'timeout' => $timeout]);
 		$tarManager = new TAR($archivePath);
-		$tarFiles = $tarManager->getFiles();
 		$targetPath = __DIR__ . '/../../models/';
-		$tarManager->extractList($tarFiles, $targetPath);
+		$tarManager->extract($targetPath);
 		unlink($archivePath);
 		return true;
 	}
