@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Status" : "Stato",
     "Resources" : "Risorse",
+    "Node.js" : "Node.js",
     "Failed to load settings" : "Caricamento impostazioni non riuscito",
     "Failed to save settings" : "Salvataggio impostazioni non riuscito"
 },
