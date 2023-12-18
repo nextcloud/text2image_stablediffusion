@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Status" : "상태",
     "Resources" : "자원",
+    "The number of threads to use" : "사용할 스레드의 수",
     "Failed to load settings" : "환경설정 로딩 실패",
     "Failed to save settings" : "환경설정 저장 실패"
 },
