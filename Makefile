@@ -135,6 +135,7 @@ appstore:
 	--include=/README.md \
 	--include=/package.json \
 	--include=/package-lock.json \
+	--include=/node_modules \
 	--include=/composer.json \
 	--include=/composer.lock \
 	--include=/src \
