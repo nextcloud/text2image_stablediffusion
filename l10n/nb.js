@@ -2,6 +2,10 @@ OC.L10N.register(
     "text2image_stablediffusion",
     {
     "Status" : "Status",
+    "Machine learning models have been downloaded successfully." : "Maskinlæringsmodeller er lastet ned.",
+    "The machine learning models still need to be downloaded (see below)." : "Maskinlæringsmodellene må fortsatt lastes ned (se nedenfor).",
+    "Background Jobs are not executed via cron. This app requires background jobs to be executed via cron." : "Bakgrunnsjobber utføres ikke via cron. Denne appen krever at bakgrunnsjobber utføres via cron.",
+    "Scheduled transcription Jobs: {scheduled}" : "Planlagte transkripsjonsjobber: {scheduled}",
     "Resources" : "Ressurser",
     "Node.js" : "Node.js",
     "Checking Node.js" : "Sjekker Node.js",
