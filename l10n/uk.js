@@ -2,8 +2,8 @@ OC.L10N.register(
     "text2image_stablediffusion",
     {
     "Status" : "Статус",
-    "Machine learning models have been downloaded successfully." : "Завантаження моделей машинного навчання відбулося успішно.",
-    "The machine learning models still need to be downloaded (see below)." : "Моделі машинного навчання все ще потрібно завантажити (див. нижче).",
+    "Machine learning models have been downloaded successfully." : "Звантаження моделей машинного навчання відбулося успішно.",
+    "The machine learning models still need to be downloaded (see below)." : "Моделі машинного навчання все ще потрібно звантажити (див. нижче).",
     "Background Jobs are not executed via cron. This app requires background jobs to be executed via cron." : "Фонові завдання не виконуються через cron. Цей застосунок вимагає, щоб фонові завдання виконувалися тільки через cron.",
     "Scheduled transcription Jobs: {scheduled}" : "Запланована робота з розшифрування: {scheduled}",
     "Resources" : "Ресурси",
