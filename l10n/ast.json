@@ -2,6 +2,7 @@
     "Local Image Generation with Stable Diffusion" : "Xeneración d'imáxenes llocal con Stable Diffusion",
     "Status" : "Estáu",
     "Machine learning models have been downloaded successfully." : "Los modelos de deprendimientu computacional baxáronse correutamente.",
+    "The machine learning models still need to be downloaded (see below)." : "Tovía hai que baxar los modelos de deprendimientu computacional (más información abaxo)",
     "Background Jobs are not executed via cron. This app requires background jobs to be executed via cron." : "Los trabayos en segundu planu nun s'executen per cron. Esta aplicación rique que los trabayos en segundu planu s'executen per cron.",
     "The app was installed successfully and will generate images in background processes on request." : "L'aplicación instalóse correutamente y va xenerar imáxenes en procesos de segundu planu baxo solicitú.",
     "Scheduled transcription Jobs: {scheduled}" : "Trabayos de trescripción programaos: {scheduled}",
