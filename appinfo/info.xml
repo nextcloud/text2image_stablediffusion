@@ -37,7 +37,7 @@ Learn more about the Nextcloud Ethical AI Rating [in our blog](https://nextcloud
     <screenshot>https://raw.githubusercontent.com/nextcloud/text2image_stablediffusion/main/screenshots/Logo.png</screenshot>
 
     <dependencies>
-        <nextcloud min-version="28" max-version="28" />
+        <nextcloud min-version="28" max-version="30" />
     </dependencies>
 
     <repair-steps>
