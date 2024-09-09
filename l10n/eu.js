@@ -11,6 +11,7 @@ OC.L10N.register(
     "Checking Node.js" : "Node.js egiaztatzen",
     "Could not execute the Node.js binary. You may need to set the path to a working binary manually." : "Ezin izan da Node.js binarioa abiatu. Binarioaren bide-izena ezarri beharko duzu eskuz.",
     "Node.js {version} binary was installed successfully." : "Node.js {version} binarioa ondo instalatu da.",
+    "For Nextcloud Snap users, you need to adjust this path to point to the snap's \"current\" directory as the pre-configured path will change with each update. For example, set it to \"/var/snap/nextcloud/current/nextcloud/extra-apps/recognize/bin/node\" instead of \"/var/snap/nextcloud/9337974/nextcloud/extra-apps/recognize/bin/node\"" : "Nextcloud Snap erabiltzaileentzat, bide-izen hau egokitu behar duzu snap-aren \"uneko\" direktoriora seinalatzeko, aurrez konfiguratutako bidea eguneratze bakoitzean aldatuko baita. Adibidez, ezarri \"/var/snap/nextcloud/current/nextcloud/extra-apps/recognize/bin/node\"-n \"/var/snap/nextcloud/9337974/nextcloud/extra-apps/recognize/bin/node\"-ren ordez.",
     "Failed to load settings" : "Ezarpenak kargatzeak huts egin du",
     "Failed to save settings" : "Ezarpenak gordetzeak huts egin du"
 },
