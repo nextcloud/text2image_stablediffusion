@@ -122,6 +122,9 @@ jobs:
       - name: Download models
         run: |
           ./occ text2image_stablediffusion:download-model
+          cd apps/${{ env.APP_NAME }}
+          curl -o models.tar.gz https://download.nextcloud.com/server/apps/text2image_stablediffusion/stable-diffusion-xl-base-1.0/models.tar.gz
+          tar -xf ./models.tar.gz -C ./models --overwrite
 
       - name: Run generate
         run: |
