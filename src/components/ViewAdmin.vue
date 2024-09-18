@@ -8,12 +8,12 @@
 	<div id="text2image_stablediffusion">
 		<figure v-if="loading" class="icon-loading loading" />
 		<figure v-if="!loading && success" class="icon-checkmark success" />
-		<NcSettingsSection :title="t('text2image_stablediffusion', 'Status')">
+		<NcSettingsSection :name="t('text2image_stablediffusion', 'Status')">
 			<NcNoteCard v-if="modelsDownloaded" show-alert type="success">
 				{{ t('text2image_stablediffusion', 'Machine learning models have been downloaded successfully.') }}
 			</NcNoteCard>
 			<NcNoteCard v-else type="error">
-				{{ t('text2image_stablediffusion', 'The machine learning models still need to be downloaded (see below).') }}
+				{{ t('text2image_stablediffusion', 'The machine learning models still need to be downloaded.') }}
 			</NcNoteCard>
 			<NcNoteCard v-if="nodejs === false" type="error">
 				{{ t('text2image_stablediffusion', 'Could not execute the Node.js executable. You may need to set the path to a working executable manually. (See below.)') }}
@@ -30,15 +30,12 @@
 				</NcNoteCard>
 			</template>
 		</NcSettingsSection>
-		<NcSettingsSection :title="t('text2image_stablediffusion', 'Resources')">
-			<p>
-				<NcTextField :value.sync="settings['threads']"
-					:label-visible="true"
+		<NcSettingsSection :name="t('text2image_stablediffusion', 'Resources')">
+			<NcTextField :value.sync="settings['threads']"
 					:label="t('text2image_stablediffusion', 'The number of threads to use')"
 					@update:value="onChange" />
-			</p>
 		</NcSettingsSection>
-		<NcSettingsSection :title="t('recognize', 'Node.js')">
+		<NcSettingsSection :name="t('recognize', 'Node.js')">
 			<p v-if="nodejs === undefined">
 				<span class="icon-loading-small" />&nbsp;&nbsp;&nbsp;&nbsp;{{ t('text2image_stablediffusion', 'Checking Node.js') }}
 			</p>

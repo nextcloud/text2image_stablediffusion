@@ -33,15 +33,15 @@
     "@nextcloud/initial-state": "^2.0.0",
     "@nextcloud/router": "^2.0.0",
     "@nextcloud/stylelint-config": "^2.2.0",
-    "@nextcloud/vue": "^7.7.1",
-    "@nextcloud/webpack-vue-config": "^5.4.0",
+    "@nextcloud/vue": "8.x",
+    "@nextcloud/webpack-vue-config": "6.x",
     "vue": "^2.7.14"
   },
   "browserslist": [
     "extends @nextcloud/browserslist-config"
   ],
   "engines": {
-    "node": "18.x",
-    "npm": "8.x || 9.x"
+    "node": "20.x",
+    "npm": "10.x"
   }
 }
