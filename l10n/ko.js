@@ -2,6 +2,7 @@ OC.L10N.register(
     "text2image_stablediffusion",
     {
     "Status" : "상태",
+    "The machine learning models still need to be downloaded." : "아직 기계 학습 모델이 다운로드되지  않았습니다.",
     "Resources" : "자원",
     "The number of threads to use" : "사용할 스레드의 수",
     "Node.js" : "Node.js",

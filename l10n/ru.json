@@ -4,7 +4,7 @@
     "Image generation using Stable Diffusion by Stability AI running locally" : "Генерация изображений с использованием Stable Diffusion от Stability AI, запускаемая локально",
     "Status" : "Состояние",
     "Machine learning models have been downloaded successfully." : "Модели машинного обучения успешно загружены.",
-    "The machine learning models still need to be downloaded (see below)." : "Модели машинного обучения еще необходимо загрузить (см. ниже).",
+    "The machine learning models still need to be downloaded." : "Необходима загрузка моделей машинного обучения.",
     "Could not execute the Node.js executable. You may need to set the path to a working executable manually. (See below.)" : "Не удалось выполнить исполняемый файл Node.js. Возможно, вам придется вручную указать путь к рабочему исполняемому файлу. (См. ниже)",
     "Background Jobs are not executed via cron. This app requires background jobs to be executed via cron." : "Фоновые задания не выполняются через cron. Это приложение требует выполнения фоновых заданий через cron.",
     "The app was installed successfully and will generate images in background processes on request." : "Приложение было успешно установлено и по запросу будет генерировать изображения в фоновых процессах.",

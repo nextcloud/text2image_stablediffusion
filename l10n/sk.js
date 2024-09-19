@@ -2,6 +2,7 @@ OC.L10N.register(
     "text2image_stablediffusion",
     {
     "Status" : "Stav",
+    "The machine learning models still need to be downloaded." : "Stále je potrebné stiahnuť modely strojového učenia.",
     "Resources" : "Zdroje",
     "Node.js" : "Node.js",
     "Checking Node.js" : "Kontrola Node.js",

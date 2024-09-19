@@ -6,7 +6,7 @@ OC.L10N.register(
     "Image generation using Stable Diffusion by Stability AI running locally" : "Vytváření obrázků pomocí Stable Diffusion od Stability AI, provozované na tomto serveru",
     "Status" : "Stav",
     "Machine learning models have been downloaded successfully." : "Modely strojového učení byly úspěšně staženy.",
-    "The machine learning models still need to be downloaded (see below)." : "Pořád ještě je třeba stáhnout si modely strojového učení (viz níže).",
+    "The machine learning models still need to be downloaded." : "Pořád ještě je třeba stáhnout si modely strojového učení.",
     "Could not execute the Node.js executable. You may need to set the path to a working executable manually. (See below.)" : "Nedaří se spustit soubor, obsahující Node.js. Může být třeba ručně nastavit popis umístění funkčního spustitelného souboru (viz níže).",
     "Background Jobs are not executed via cron. This app requires background jobs to be executed via cron." : "Úlohy na pozadí nejsou vykonávány prostřednictvím plánovače cron. Tato aplikace ovšem vyžaduje, aby tomu tak bylo.",
     "The app was installed successfully and will generate images in background processes on request." : "Aplikace byla úspěšně nainstalována a na vyžádání bude v procesech na pozadí provádět vytváření obrázků.",

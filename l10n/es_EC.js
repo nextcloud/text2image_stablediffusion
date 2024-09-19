@@ -3,7 +3,7 @@ OC.L10N.register(
     {
     "Status" : "Estado",
     "Machine learning models have been downloaded successfully." : "Los modelos de aprendizaje automático se han descargado correctamente.",
-    "The machine learning models still need to be downloaded (see below)." : "Aún falta descargar los modelos de aprendizaje automático (ver abajo).",
+    "The machine learning models still need to be downloaded." : "Aún es necesario descargar los modelos de aprendizaje automático.",
     "Background Jobs are not executed via cron. This app requires background jobs to be executed via cron." : "Las tareas en segundo plano no se ejecutan a través de cron. Esta aplicación requiere que las tareas en segundo plano se ejecuten a través de cron.",
     "Scheduled transcription Jobs: {scheduled}" : "Trabajos de transcripción programados: {programados}",
     "Resources" : "Recursos",

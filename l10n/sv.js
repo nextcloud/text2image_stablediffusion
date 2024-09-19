@@ -5,7 +5,6 @@ OC.L10N.register(
     "Image generation using Stable Diffusion by Stability AI running locally" : "Bildgenerering lokal med Stabil diffusion från Stability AI ",
     "Status" : "Status",
     "Machine learning models have been downloaded successfully." : "Maskininlärningsmodeller har laddats ned.",
-    "The machine learning models still need to be downloaded (see below)." : "Maskininlärningsmodellerna behöver fortfarande laddas ner (se nedan).",
     "Resources" : "Resurser",
     "Failed to load settings" : "Kunde inte läsa in inställningar",
     "Failed to save settings" : "Kunde inte spara inställningarna"
