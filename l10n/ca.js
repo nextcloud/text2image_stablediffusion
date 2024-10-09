@@ -1,6 +1,7 @@
 OC.L10N.register(
     "text2image_stablediffusion",
     {
+    "The machine learning models still need to be downloaded." : "Els models d'aprenentatge automàtic encara s'han de descarregar.",
     "Resources" : "Recursos",
     "Node.js" : "Node.js",
     "Checking Node.js" : "Comprovant Node.js",
