@@ -20,7 +20,7 @@
     "Node.js {version} binary was installed successfully." : "تم تثبيت الملف الثنائي لبرمجية Node.js {version}بنجاح.",
     "If the shipped Node.js binary doesn't work on your system for some reason you can set the path to a custom node.js binary. Currently supported is Node v18.12 and newer v18 releases." : "إذا لم يعمل بُريمج Node.js المشحون على جهازك لسببٍ ما، يمكنك تعيين مسار مخصص لبُريمج Node.js الثنائي. الإصدرات المدعومة حاليّاً من Node.js هي v18.12، أو الأحدث من v18.",
     "For Nextcloud Snap users, you need to adjust this path to point to the snap's \"current\" directory as the pre-configured path will change with each update. For example, set it to \"/var/snap/nextcloud/current/nextcloud/extra-apps/recognize/bin/node\" instead of \"/var/snap/nextcloud/9337974/nextcloud/extra-apps/recognize/bin/node\"" : "بالنسبة لمستخدمي Snap لنكست كلاود، تحتاج إلى ضبط هذا المسار للإشارة إلى الدليل \"الحالي\" الخاص بـ Snap حيث سيتغير المسار الذي تم تكوينه مسبقًا مع كل تحديث. على سبيل المثال، اضبطه على \"/var/snap/nextcloud/current/nextcloud/extra-apps/recognize/bin/node\" بدلاً من \"/var/snap/nextcloud/9337974/nextcloud/extra-apps/recognize/bin/node\"",
-    "Failed to load settings" : "إخفاق في تحميل الإعدادات",
+    "Failed to load settings" : "فشل في تحميل الإعدادات",
     "Failed to save settings" : "تعذّر حفظ الإعدادات"
 },"pluralForm" :"nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;"
 }
