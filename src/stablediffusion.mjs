@@ -1,19 +1,17 @@
 import ort from 'onnxruntime-node'
-import path from 'path'
-import { fileURLToPath } from 'url'
 import getStdin from "get-stdin"
 import tf from '@tensorflow/tfjs'
 import { PNG } from 'pngjs'
 import fs from 'fs'
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = '/var/www/html/custom_apps/text2image_stablediffusion';
 
 global.__dirname = __dirname
 
 const SEED = Math.round(Math.random()*100000)
 const NUM_INFERENCE_STEPS = 40
-const THREADS = parseInt(process.env.STABLEDIFFUSION_THREADS || 4)
+const THREADS = parseInt(process.env.STABLEDIFFUSION_THREADS || 2)
+const EXECUTION_PROVIDERS = process.env.STABLEDIFFUSION_EXECUTION_PROVIDERS || ['cpu']
 const GUIDANCE_SCALE = 5.0
 
 async function main(inputText, batchSizeStr, outputDir) {
@@ -23,30 +21,30 @@ async function main(inputText, batchSizeStr, outputDir) {
 
 	const batchSize = parseInt(batchSizeStr)
 
-	const textEncoder = await ort.InferenceSession.create(__dirname+'/../models/stable-diffusion-xl/text_encoder/model.onnx', {
+	const textEncoder = await ort.InferenceSession.create(__dirname+'/models/stable-diffusion-xl/text_encoder/model.onnx', {
 		executionMode: 'parallel',
-		executionProviders: ['cuda', 'cpu'],
+		executionProviders: EXECUTION_PROVIDERS,
 		intraOpNumThreads: THREADS,
 		interOpNumThreads: THREADS
 	})
 
-	const uNet = await ort.InferenceSession.create(__dirname+'/../models/stable-diffusion-xl/unet/model.onnx', {
+	const uNet = await ort.InferenceSession.create(__dirname+'/models/stable-diffusion-xl/unet/model.onnx', {
 		executionMode: 'parallel',
-		executionProviders: ['cuda', 'cpu'],
+		executionProviders: EXECUTION_PROVIDERS,
 		intraOpNumThreads: THREADS,
 		interOpNumThreads: THREADS
 	})
 
-	const vaeDecoder = await ort.InferenceSession.create(__dirname+'/../models/stable-diffusion-xl/vae_decoder/model.onnx', {
+	const vaeDecoder = await ort.InferenceSession.create(__dirname+'/models/stable-diffusion-xl/vae_decoder/model.onnx', {
 		executionMode: 'parallel',
-		executionProviders: ['cuda', 'cpu'],
+		executionProviders: EXECUTION_PROVIDERS,
 		intraOpNumThreads: THREADS,
 		interOpNumThreads: THREADS
 	})
 
-	const textEncoder2 = await ort.InferenceSession.create(__dirname+'/../models/stable-diffusion-xl/text_encoder_2/model.onnx', {
+	const textEncoder2 = await ort.InferenceSession.create(__dirname+'/models/stable-diffusion-xl/text_encoder_2/model.onnx', {
 		executionMode: 'parallel',
-		executionProviders: ['cuda', 'cpu'],
+		executionProviders: EXECUTION_PROVIDERS,
 		intraOpNumThreads: THREADS,
 		interOpNumThreads: THREADS
 	})

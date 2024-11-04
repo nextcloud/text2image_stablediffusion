@@ -43,3 +43,4 @@ This requires the following things to be present:
 * tar: for building the archive
 * curl: used if phpunit and composer are not installed to fetch them from the web
 * npm: for building and testing everything JS
+* php: for building the PHP code
