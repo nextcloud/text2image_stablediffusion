@@ -17,7 +17,7 @@
     "Node.js" : "Node.js",
     "Checking Node.js" : "Comprobando Node.js",
     "Could not execute the Node.js binary. You may need to set the path to a working binary manually." : "No se pudo ejecutar el binario de Node.js. Es probable que necesite establecer la ruta a un binario funcional manualmente.",
-    "Node.js {version} binary was installed successfully." : "El binario Node.js {version} fue instalado exitósamente.",
+    "Node.js {version} binary was installed successfully." : "El binario Node.js {version} se ha instalado correctamente.",
     "If the shipped Node.js binary doesn't work on your system for some reason you can set the path to a custom node.js binary. Currently supported is Node v18.12 and newer v18 releases." : "Si el binario Node.js enviado no funciona en su sistema por algún motivo, puede establecer la ruta a un binario de node.js personalizada. Actualmente se admite Node v18.12 y versiones más recientes de v18.",
     "For Nextcloud Snap users, you need to adjust this path to point to the snap's \"current\" directory as the pre-configured path will change with each update. For example, set it to \"/var/snap/nextcloud/current/nextcloud/extra-apps/recognize/bin/node\" instead of \"/var/snap/nextcloud/9337974/nextcloud/extra-apps/recognize/bin/node\"" : "Para los usuarios del Snap de Nextcloud, tendrá que ajustar esta ruta para apuntar al directorio \"actual\" de snap ya que la ruta pre-configurada cambiará con cada actualización. Por ejemplo, configurelo a \"/var/snap/nextcloud/current/nextcloud/extra-apps/recognize/bin/node\" en vez de \"/var/snap/nextcloud/9337974/nextcloud/extra-apps/recognize/bin/node\"",
     "Failed to load settings" : "Fallo al cargar configuraciones",
