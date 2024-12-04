@@ -1,6 +1,7 @@
 { "translations": {
     "Status" : "Egoera",
     "Machine learning models have been downloaded successfully." : "Machine learning modeloak ondo deskargatu dira.",
+    "The machine learning models still need to be downloaded." : "Machine learning modeloak oraindik deskargatu behar dira.",
     "Background Jobs are not executed via cron. This app requires background jobs to be executed via cron." : "Atzeko lanak ez dira cron bidez exekutatzen ari. Aplikazio honek atzeko lanak cron bidez exekutatzea behar du.",
     "Scheduled transcription Jobs: {scheduled}" : "Antolatutako transkipzio lanak: {scheduled}",
     "Resources" : "Baliabideak",
