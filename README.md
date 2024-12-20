@@ -8,6 +8,10 @@ Text2Image provider using Stable Diffusion XL by Stability AI
 
 The models run completely on your machine. No private data leaves your servers.
 
+
+### This app is deprecated
+in favor of [tetx2image_stablediffusion2](https://github.com/nextcloud/text2image_stablediffusion2)
+
 ## Ethical AI Rating
 ### Rating: 🟢
 
